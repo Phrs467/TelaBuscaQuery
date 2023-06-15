@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 629
-  ClientWidth = 1124
+  ClientHeight = 663
+  ClientWidth = 1126
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,8 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDefault
+  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -23,7 +25,7 @@ object Form1: TForm1
   object gridDados: TDBGrid
     Left = 0
     Top = 0
-    Width = 1124
+    Width = 1126
     Height = 209
     Align = alTop
     DataSource = dsDados
@@ -64,6 +66,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Buscar'
     TabOrder = 4
+    OnClick = btBuscarClick
   end
   object BtFiltrar: TButton
     Left = 311
@@ -72,6 +75,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Filtrar'
     TabOrder = 5
+    OnClick = BtFiltrarClick
   end
   object BtLocalizar: TButton
     Left = 392
@@ -80,6 +84,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Localizar'
     TabOrder = 6
+    OnClick = BtLocalizarClick
   end
   object mmSql: TMemo
     Left = 536
@@ -90,6 +95,42 @@ object Form1: TForm1
       'select * from Funcionarios')
     TabOrder = 7
     OnChange = mmSqlChange
+  end
+  object mmBuscar: TMemo
+    Left = 536
+    Top = 519
+    Width = 497
+    Height = 281
+    TabOrder = 8
+  end
+  object cbbTipo: TComboBox
+    Left = 26
+    Top = 376
+    Width = 183
+    Height = 21
+    TabOrder = 9
+  end
+  object Edit1: TEdit
+    Left = 72
+    Top = 464
+    Width = 121
+    Height = 21
+    TabOrder = 10
+  end
+  object Edit2: TEdit
+    Left = 72
+    Top = 491
+    Width = 121
+    Height = 21
+    TabOrder = 11
+  end
+  object Button1: TButton
+    Left = 208
+    Top = 472
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 12
   end
   object qrDados: TADOQuery
     Active = True

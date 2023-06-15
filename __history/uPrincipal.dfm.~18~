@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 643
+  ClientHeight = 663
   ClientWidth = 1126
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -103,7 +103,7 @@ object Form1: TForm1
     Height = 281
     TabOrder = 8
   end
-  object ComboBox1: TComboBox
+  object cbbTipo: TComboBox
     Left = 26
     Top = 376
     Width = 183

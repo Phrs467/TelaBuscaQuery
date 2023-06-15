@@ -110,27 +110,14 @@ object Form1: TForm1
     Height = 21
     TabOrder = 9
   end
-  object Edit1: TEdit
-    Left = 72
-    Top = 464
-    Width = 121
-    Height = 21
-    TabOrder = 10
-  end
-  object Edit2: TEdit
-    Left = 72
-    Top = 491
-    Width = 121
-    Height = 21
-    TabOrder = 11
-  end
   object Button1: TButton
-    Left = 208
-    Top = 472
-    Width = 75
+    Left = 328
+    Top = 254
+    Width = 139
     Height = 25
-    Caption = 'Button1'
-    TabOrder = 12
+    Caption = 'Trazer todos registros'
+    TabOrder = 10
+    OnClick = Button1Click
   end
   object qrDados: TADOQuery
     Active = True
@@ -142,13 +129,13 @@ object Form1: TForm1
     Parameters = <>
     SQL.Strings = (
       'select * from Funcionarios')
-    Left = 416
-    Top = 256
+    Left = 448
+    Top = 392
   end
   object dsDados: TDataSource
     DataSet = qrDados
-    Left = 360
-    Top = 256
+    Left = 392
+    Top = 392
   end
   object tbDados: TADOTable
     ConnectionString = 

@@ -7,6 +7,13 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Data.Win.ADODB,
   Vcl.Grids, Vcl.DBGrids, Vcl.Menus;
 
+
+type
+  TesteRecordType = Record
+    nome : String[30];
+    idade : Integer;
+
+  End;
 type
   TForm1 = class(TForm)
     gridDados: TDBGrid;
@@ -23,13 +30,16 @@ type
     tbDados: TADOTable;
     mmBuscar: TMemo;
     cbbTipo: TComboBox;
-    MainMenu1: TMainMenu;
-    Clientes1: TMenuItem;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Button1: TButton;
     procedure btCampoClick(Sender: TObject);
     procedure mmSqlChange(Sender: TObject);
     procedure BtLocalizarClick(Sender: TObject);
     procedure BtFiltrarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
+
+
   private
     { Private declarations }
   public
@@ -54,7 +64,7 @@ begin
     qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' = ' + edtValor.Text)
   else
     qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ''' + cbbCampos.Text +' = ''' + edtValor.Text);
-  
+
 
   mmBuscar.Lines.Text := qrDados.SQL.Text;
 end;
@@ -67,25 +77,27 @@ begin
   qrDados.Active := True;
 
   cbbCampos.Clear;
-  
-  for i := 0 to qrDados.Fields.Count -1 do
-  begin
-    cbbCampos.Items.Add(qrDados.Fields[i].Name);
 
-    if (qrDados.Fields[i].DataType = ftString) or 
-      (qrDados.Fields[i].DataType = ftWideString)then
-    begin
-      cbbTipo.Items.Add(qrDados.Fields[i].Name);
-      cbbTipo.Items.Text := 'String';
-    end
-    else
-    begin
-      cbbTipo.Items.Add(qrDados.Fields[i].Name);
-      cbbTipo.Items.Text := 'Outros';
-    end;
-  end;
 
-  
+
+//  for i := 0 to qrDados.Fields.Count -1 do
+//  begin
+//    cbbCampos.Items.Add(qrDados.Fields[i].Name);
+//
+//    if (qrDados.Fields[i].DataType = ftString) or
+//      (qrDados.Fields[i].DataType = ftWideString)then
+//    begin
+//      cbbTipo.Items.Add(qrDados.Fields[i].Name);
+//      cbbTipo.Items.Text := 'String';
+//    end
+//    else
+//    begin
+//      cbbTipo.Items.Add(qrDados.Fields[i].Name);
+//      cbbTipo.Items.Text := 'Outros';
+//    end;
+//  end;
+
+
     
 end;
     
@@ -105,6 +117,10 @@ begin
 //    Open;
 //  end;
 end;
+
+
+
+
 
 procedure TForm1.mmSqlChange(Sender: TObject);
 begin
