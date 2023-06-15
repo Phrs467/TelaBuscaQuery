@@ -92,7 +92,7 @@ object Form1: TForm1
     Width = 497
     Height = 281
     Lines.Strings = (
-      'select * from Funcionarios')
+      'select * from ')
     TabOrder = 7
     OnChange = mmSqlChange
   end
@@ -120,7 +120,6 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object qrDados: TADOQuery
-    Active = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Password=@m0r @g@pe;Persist Security Info=Tr' +
       'ue;User ID=koinonia;Initial Catalog=unifandatabase;Data Source=s' +

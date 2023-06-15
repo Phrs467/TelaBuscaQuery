@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 643
+  ClientHeight = 663
   ClientWidth = 1126
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -10,7 +10,6 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  Menu = MainMenu1
   OldCreateOrder = False
   Position = poDefault
   WindowState = wsMaximized
@@ -93,7 +92,7 @@ object Form1: TForm1
     Width = 497
     Height = 281
     Lines.Strings = (
-      'select * from Funcionarios')
+      'select * from ')
     TabOrder = 7
     OnChange = mmSqlChange
   end
@@ -111,8 +110,16 @@ object Form1: TForm1
     Height = 21
     TabOrder = 9
   end
+  object Button1: TButton
+    Left = 328
+    Top = 254
+    Width = 139
+    Height = 25
+    Caption = 'Trazer todos registros'
+    TabOrder = 10
+    OnClick = Button1Click
+  end
   object qrDados: TADOQuery
-    Active = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Password=@m0r @g@pe;Persist Security Info=Tr' +
       'ue;User ID=koinonia;Initial Catalog=unifandatabase;Data Source=s' +
@@ -121,13 +128,13 @@ object Form1: TForm1
     Parameters = <>
     SQL.Strings = (
       'select * from Funcionarios')
-    Left = 416
-    Top = 256
+    Left = 448
+    Top = 392
   end
   object dsDados: TDataSource
     DataSet = qrDados
-    Left = 360
-    Top = 256
+    Left = 392
+    Top = 392
   end
   object tbDados: TADOTable
     ConnectionString = 
@@ -138,27 +145,5 @@ object Form1: TForm1
     TableName = 'Funcionarios'
     Left = 328
     Top = 392
-  end
-  object MainMenu1: TMainMenu
-    Left = 88
-    Top = 472
-    object Clientes1: TMenuItem
-      Caption = 'Cadastro'
-      object Clientes2: TMenuItem
-        Caption = '&Clientes'
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
-      object Filtrar1: TMenuItem
-        Caption = 'Filtrar'
-        object Ativo1: TMenuItem
-          Caption = 'Ativo'
-        end
-        object Noativo1: TMenuItem
-          Caption = 'N'#227'o ativo'
-        end
-      end
-    end
   end
 end

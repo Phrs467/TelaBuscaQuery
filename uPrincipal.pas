@@ -122,8 +122,9 @@ begin
 
   qrDados.SQL.Add(mmSql.Lines.Text);
 
-  qrDados.Active := True;
+  edtValor.Clear;
 
+  qrDados.Active := True;
 end;
 
 procedure TForm1.mmSqlChange(Sender: TObject);
