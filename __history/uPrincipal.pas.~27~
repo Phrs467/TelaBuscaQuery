@@ -30,14 +30,13 @@ type
     tbDados: TADOTable;
     mmBuscar: TMemo;
     cbbTipo: TComboBox;
-    Edit1: TEdit;
-    Edit2: TEdit;
     Button1: TButton;
     procedure btCampoClick(Sender: TObject);
     procedure mmSqlChange(Sender: TObject);
     procedure BtLocalizarClick(Sender: TObject);
     procedure BtFiltrarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
 
 
   private
@@ -59,14 +58,23 @@ var
 begin
   qrDados.Active := False;
   qrDados.SQL.Clear;
-  
-  if true then
-    qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' = ' + edtValor.Text)
-  else
-    qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ''' + cbbCampos.Text +' = ''' + edtValor.Text);
 
+  cbbTipo.ItemIndex := cbbCampos.ItemIndex;
+
+  if cbbTipo.Text = 'String' then
+  begin
+    qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' LIKE ''%' + edtValor.Text+ '%''');
+  end
+  else
+  begin
+    qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' = ' + edtValor.Text);
+  end;
 
   mmBuscar.Lines.Text := qrDados.SQL.Text;
+
+  qrDados.SQL.Add(mmBuscar.Lines.Text);
+
+  qrDados.Active := True;
 end;
 
 procedure TForm1.btCampoClick(Sender: TObject);
@@ -78,49 +86,61 @@ begin
 
   cbbCampos.Clear;
 
+  for i := 0 to qrDados.Fields.Count -1 do
+  begin
+    cbbCampos.Items.Add(qrDados.Fields[i].FieldName);
 
-
-//  for i := 0 to qrDados.Fields.Count -1 do
-//  begin
-//    cbbCampos.Items.Add(qrDados.Fields[i].Name);
-//
-//    if (qrDados.Fields[i].DataType = ftString) or
-//      (qrDados.Fields[i].DataType = ftWideString)then
-//    begin
-//      cbbTipo.Items.Add(qrDados.Fields[i].Name);
-//      cbbTipo.Items.Text := 'String';
-//    end
-//    else
-//    begin
-//      cbbTipo.Items.Add(qrDados.Fields[i].Name);
-//      cbbTipo.Items.Text := 'Outros';
-//    end;
-//  end;
-
-
-    
+    if (qrDados.Fields[i].DataType = ftString) or
+      (qrDados.Fields[i].DataType = ftWideString)then
+    begin
+      cbbTipo.Items.Add('String');
+    end
+    else
+    begin
+      cbbTipo.Items.Add('Outros');
+    end;
+  end;
 end;
     
 
 procedure TForm1.BtFiltrarClick(Sender: TObject);
 begin
-//  tbDados.Filter := qrDados.SQL.Add('Select * from' + cbbCampos.Items.Text '')
+  qrDados.Filtered := False;
+
+  cbbTipo.ItemIndex := cbbCampos.ItemIndex;
+
+  if cbbTipo.Text = 'String' then
+  begin
+    qrDados.Filter := cbbCampos.Text + ' = ''' + edtValor.Text + '''';
+    qrDados.Filtered := True;
+  end
+  else
+  begin
+    qrDados.Filter := cbbCampos.Text + ' = ' + edtValor.Text;
+    qrDados.Filtered := True;
+  end;
+
+  qrDados.Active := True;
 end;
 
 procedure TForm1.BtLocalizarClick(Sender: TObject);
+var
+  i : Integer;
 begin
-//  with qrDados do
-//  begin
-//    close;
-//    SQL.Clear;
-//    qrDados.Locate(cbbCampos.Text,edtValor.Text,[]);
-//    Open;
-//  end;
+  qrDados.Locate(cbbCampos.Text, edtValor.Text, [loPartialKey, loCaseInsensitive]);
 end;
 
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  qrDados.Active := False;
+  qrDados.SQL.Clear;
 
+  qrDados.SQL.Add(mmSql.Lines.Text);
 
+  edtValor.Clear;
 
+  qrDados.Active := True;
+end;
 
 procedure TForm1.mmSqlChange(Sender: TObject);
 begin

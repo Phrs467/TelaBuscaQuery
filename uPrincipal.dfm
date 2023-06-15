@@ -92,7 +92,7 @@ object Form1: TForm1
     Width = 497
     Height = 281
     Lines.Strings = (
-      'select * from ')
+      'select * from Funcionarios')
     TabOrder = 7
     OnChange = mmSqlChange
   end

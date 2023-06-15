@@ -59,7 +59,16 @@ begin
   qrDados.Active := False;
   qrDados.SQL.Clear;
 
-  qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' = ''' + edtValor.Text+ '''');
+  cbbTipo.ItemIndex := cbbCampos.ItemIndex;
+
+  if cbbTipo.Text = 'String' then
+  begin
+    qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' LIKE ''%' + edtValor.Text+ '%''');
+  end
+  else
+  begin
+    qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' = ' + edtValor.Text);
+  end;
 
   mmBuscar.Lines.Text := qrDados.SQL.Text;
 
@@ -96,14 +105,21 @@ end;
 
 procedure TForm1.BtFiltrarClick(Sender: TObject);
 begin
-  qrDados.Active := False;
-  qrDados.SQL.Clear;
+  mmBuscar.Clear;
+  qrDados.Filtered := False;
 
-  qrDados.SQL.Add(mmSql.Lines.Text + 'WHERE ' + cbbCampos.Text +' LIKE ''%' + edtValor.Text+ '%''');
+  cbbTipo.ItemIndex := cbbCampos.ItemIndex;
 
-  mmBuscar.Lines.Text := qrDados.SQL.Text;
-
-  qrDados.SQL.Add(mmBuscar.Lines.Text);
+  if cbbTipo.Text = 'String' then
+  begin
+    qrDados.Filter := cbbCampos.Text + ' = ''' + edtValor.Text + '''';
+    qrDados.Filtered := True;
+  end
+  else
+  begin
+    qrDados.Filter := cbbCampos.Text + ' = ' + edtValor.Text;
+    qrDados.Filtered := True;
+  end;
 
   qrDados.Active := True;
 end;
@@ -120,9 +136,12 @@ begin
   qrDados.Active := False;
   qrDados.SQL.Clear;
 
+  qrDados.Filtered := False;
+
   qrDados.SQL.Add(mmSql.Lines.Text);
 
   edtValor.Clear;
+  mmBuscar.Clear;
 
   qrDados.Active := True;
 end;
